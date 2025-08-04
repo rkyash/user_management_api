@@ -1,0 +1,20 @@
+server:
+  port: "8080"
+
+database:
+  host: "localhost"
+  port: "5432"
+  user: "postgres"
+  password: "asimov78"
+  dbname: "user_management"
+  sslmode: "disable"
+
+jwt:
+  accessSecret: "cWGs2YoqXAluifDi37MHNQccyk5UV3yv"
+  refreshSecret: "E7xuzr4qDBa7LNbFM7PYfXHAbKskBNTh"
+  accessExpiry: 15    # 15 minutes
+  refreshExpiry: 7    # 7 days
+
+log:
+  level: "debug"
+  file: "logs/app.log"
