@@ -185,6 +185,26 @@ The application uses structured logging with the following features:
 - Daily rotating log files
 - JSON formatted logs
 
+## Monitoring
+
+The application includes a comprehensive monitoring setup with Prometheus and Grafana:
+
+### Prometheus
+- Metrics collection at `/metrics` endpoint
+- Default scrape interval: 15s
+- Available at: http://localhost:9090
+
+### Grafana
+- Pre-configured dashboards
+- Default credentials:
+  - Username: admin
+  - Password: admin
+- Available at: http://localhost:3000
+- Default dashboard includes:
+  - HTTP Request Rate
+  - Response Time
+  - System metrics
+
 ## Updating API Documentation
 
 When you make changes to the API endpoints, follow these steps to update the documentation:

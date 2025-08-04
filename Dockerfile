@@ -1,9 +1,9 @@
-FROM golang:1.22-alpine AS builder
+FROM golang:1.23.1 AS builder
 
 WORKDIR /app
 
 # Install required dependencies
-RUN apk add --no-cache git
+RUN apt-get update && apt-get install -y git
 
 # Copy go mod files
 COPY go.mod go.sum ./
@@ -22,6 +22,8 @@ WORKDIR /app
 # Copy the binary from builder
 COPY --from=builder /app/api .
 COPY --from=builder /app/config/config.yaml ./config/
+COPY --from=builder /app/statics/index.html ./statics/
+COPY --from=builder /app/docs/* ./docs/
 
 # Create logs directory
 RUN mkdir -p /app/logs

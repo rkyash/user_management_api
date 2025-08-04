@@ -17,6 +17,7 @@ import (
 	"github.com/sirupsen/logrus"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	ginprometheus "github.com/zsais/go-gin-prometheus"
 
 	docs "api/docs"
 )
@@ -129,6 +130,10 @@ func main() {
 	// Initialize Gin
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
+
+	// Initialize Prometheus middleware
+	p := ginprometheus.NewPrometheus("gin")
+	p.Use(router)
 
 	// Initialize Swagger
 	docs.SwaggerInfo.Title = "User Management API"
