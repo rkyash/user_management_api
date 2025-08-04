@@ -1,6 +1,8 @@
 # User Management API
 
-A complete RESTful API for user management with authentication, authorization, and logging built with Go, Gin, GORM, and PostgreSQL.
+# User Management API
+
+A complete RESTful API for user management with JWT authentication, role-based authorization, and comprehensive API documentation using Scalar UI. Built with Go, Gin framework, and PostgreSQL.
 
 ## Features
 
@@ -9,10 +11,11 @@ A complete RESTful API for user management with authentication, authorization, a
 - User profile management
 - Role-based access control (Admin, User)
 - Password reset functionality (simulated)
-- Structured logging
-- Request/response logging
+- Interactive API documentation with Scalar UI
+- Swagger/OpenAPI specification
 - PostgreSQL database with GORM
 - Docker support
+- Structured logging and monitoring
 
 ## Prerequisites
 
@@ -30,6 +33,10 @@ A complete RESTful API for user management with authentication, authorization, a
 ├── config/
 │   ├── config.go
 │   └── config.yaml
+├── docs/                    # API Documentation
+│   ├── docs.go             # Generated Swagger docs
+│   ├── swagger.json        # OpenAPI specification
+│   └── swagger.yaml        # YAML version of API spec
 ├── internal/
 │   ├── auth/
 │   │   └── auth.go
@@ -42,7 +49,10 @@ A complete RESTful API for user management with authentication, authorization, a
 │   │   └── logging.go
 │   └── models/
 │       └── models.go
-├── logs/
+├── statics/               # Static files for documentation
+│   └── docs/
+│       └── index.html    # Scalar UI template
+├── logs/                 # Application logs
 ├── Dockerfile
 ├── docker-compose.yml
 ├── go.mod
@@ -101,6 +111,38 @@ log:
    go run cmd/api/main.go
    ```
 
+## API Documentation
+
+The API comes with two different documentation interfaces:
+
+### Scalar UI Documentation
+- **URL**: http://localhost:8080/
+- Modern and interactive API documentation
+- Features:
+  - Clean and intuitive interface
+  - Try-out functionality with request builder
+  - Authentication support
+  - Dark/Light theme
+  - OpenAPI specification viewer
+  - Code samples for various languages
+  - Real-time API testing
+
+### Swagger UI Documentation
+- **URL**: http://localhost:8080/swagger/index.html
+- Traditional Swagger interface with:
+  - Complete API specification
+  - Request/Response examples
+  - Authentication flow documentation
+  - Model schemas
+  - Interactive endpoint testing
+
+### OpenAPI Specification
+- Available at: http://localhost:8080/docs/swagger.json
+- Can be imported into any OpenAPI-compatible tool
+- Detailed request/response schemas
+- Authentication specifications
+- Error responses documentation
+
 ## API Endpoints
 
 ### Authentication
@@ -143,6 +185,17 @@ The application uses structured logging with the following features:
 - Daily rotating log files
 - JSON formatted logs
 
+## Updating API Documentation
+
+When you make changes to the API endpoints, follow these steps to update the documentation:
+
+1. Update the Swagger annotations in your handler functions
+2. Regenerate the Swagger documentation:
+   ```bash
+   swag init -g cmd/api/main.go
+   ```
+3. The documentation will be automatically updated in both Scalar UI and Swagger UI
+
 ## Contributing
 
 1. Fork the repository
@@ -150,6 +203,8 @@ The application uses structured logging with the following features:
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
+
+Note: When contributing, please ensure you update the API documentation for any endpoint changes.
 
 ## License
 
